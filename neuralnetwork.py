@@ -21,7 +21,7 @@ def forward_pass(inputs, net):
     hidden_in = []
     hidden_out = []
 
-    for i in range(2)
+    for i in range(2):
         summation = sum(inputs[j] * net["input_hidden_weights"][j][i] for j in range(2)) + net["hidden_bias"][i]
         hidden_in.append(summation)
         hidden_out.append(sigmoid(summation))

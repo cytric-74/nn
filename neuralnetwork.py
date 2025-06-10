@@ -66,3 +66,13 @@ def train(network, data, labels, epochs, learning_rate):
 def predict(network, inputs):
     _, output = forward_pass(inputs, network)
     return output
+
+# training data (XOR)
+data = [
+    [0, 0],
+    [0, 1],
+    [1, 0],
+    [1, 1]
+]
+
+labels = [0, 1, 1, 0] 

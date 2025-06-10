@@ -60,3 +60,9 @@ def train(network, data, labels, epochs, learning_rate):
 
         if epoch % 1000 == 0:
             print(f"Epoch {epoch}, MSE: {total_error/len(data)}")
+
+
+#testin 
+def predict(network, inputs):
+    _, output = forward_pass(inputs, network)
+    return output

@@ -1,5 +1,3 @@
-# Simple Neural Network from Scratch (No Libraries)
-
 This is a very basic neural network written entirely in Python. It's just Python and math to help me understand how a neural network actually works under the hood.
 
 ## What it does

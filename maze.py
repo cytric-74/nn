@@ -23,6 +23,19 @@ def init_network(input_size, hidden_sizes, output_size):
         layers.append({'weights': weights, 'biases': biases})
     return layers
 
+def forward_pass(network, input_vector):
+    activations = input_vector
+    all_layers = [activations]
+
+    for layer in network:
+        next_activations = []
+        for weights, bias in zip(layer['weights'], layer['biases']):
+            z = sum(w * a for w, a in zip(weights, activations)) + bias
+            next_activations.append(sigmoid(z))
+        activations = next_activations
+        all_layers.append(activations)
+    
+    return all_layers
 
 
 

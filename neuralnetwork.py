@@ -76,3 +76,10 @@ data = [
 ]
 
 labels = [0, 1, 1, 0] 
+
+net = init_networking()
+train(net, data, labels, epochs=10000, learning_rate=0.1)
+
+print("\nPredictions after training:")
+for d in data:
+    print(f"Input: {d}, Output: {predict(net, d):.4f}")

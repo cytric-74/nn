@@ -37,5 +37,14 @@ def forward_pass(network, input_vector):
     
     return all_layers
 
+def backward_pass(network, all_layers, expected, learning_rate):
+    deltas = []
+    layers_count = len(network)
+    
+    # error handling at output layer
+    output = all_layers[-1]
+    error = [(expected[i] - output[i]) * sigmoid_derivative(output[i]) for i in range(len(expected))]
+    deltas.append(error)
+
 
 

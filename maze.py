@@ -46,5 +46,13 @@ def backward_pass(network, all_layers, expected, learning_rate):
     error = [(expected[i] - output[i]) * sigmoid_derivative(output[i]) for i in range(len(expected))]
     deltas.append(error)
 
+    # for handling hidden layer error
+    for l in range(layers_count-1, 0, -1):
+        delta = []
+        current_activations = all_layers[l]
+        for i in range(len(network[l-1]['weights'])):
+            error = sum(network[l]['weights'][j][i] * deltas[0][j] for j in range(len(network[l]['weights'])))
+            delta.append(error * sigmoid_derivative(current_activations[i]))
+        deltas.insert(0, delta)
 
 

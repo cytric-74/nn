@@ -65,3 +65,10 @@ def backward_pass(network, all_layers, expected, learning_rate):
 
 def predict(network, input_vector):
     return forward_pass(network, input_vector)[-1]
+
+
+def move_to_onehot(move):
+    # Up = 0, Down = 1, Left = 2, Right = 3
+    onehot = [0, 0, 0, 0]
+    onehot[move] = 1
+    return onehot

@@ -62,3 +62,6 @@ def backward_pass(network, all_layers, expected, learning_rate):
                 network[l]['weights'][i][j] += learning_rate * deltas[l][i] * all_layers[l][j]
             network[l]['biases'][i] += learning_rate * deltas[l][i]
 
+
+def predict(network, input_vector):
+    return forward_pass(network, input_vector)[-1]

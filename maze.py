@@ -83,34 +83,15 @@ maze = [
 ]
 
 training_data = [
-    # From (0,0): Only Down is valid (Right leads to wall)
     (flatten(maze) + [0, 0, 3, 3], move_to_onehot(1)),  # Down
-    
-    # From (1,0): Down is valid
     (flatten(maze) + [1, 0, 3, 3], move_to_onehot(1)),  # Down
-    
-    # From (2,0): Right is better (Down leads to a wall)
     (flatten(maze) + [2, 0, 3, 3], move_to_onehot(3)),  # Right
-    
-    # From (2,1): Down is valid
     (flatten(maze) + [2, 1, 3, 3], move_to_onehot(1)),  # Down
-    
-    # From (3,1): Right is correct (toward goal)
     (flatten(maze) + [3, 1, 3, 3], move_to_onehot(3)),  # Right
-    
-    # From (3,2): Right is correct (goal reached)
     (flatten(maze) + [3, 2, 3, 3], move_to_onehot(3)),  # Right
-    
-    # From (0,1): Right is valid (Down leads to wall)
     (flatten(maze) + [0, 1, 3, 3], move_to_onehot(3)),  # Right
-    
-    # From (1,1): Down is valid (Right leads to wall)
     (flatten(maze) + [1, 1, 3, 3], move_to_onehot(1)),  # Down
-    
-    # From (2,2): Down is invalid (wall), Right is invalid (wall), Left is best
     (flatten(maze) + [2, 2, 3, 3], move_to_onehot(2)),  # Left
-    
-    # From (1,3): Up is correct (Right is invalid)
     (flatten(maze) + [1, 3, 3, 3], move_to_onehot(0)),  # Up
 ]
 
@@ -133,15 +114,16 @@ for epoch in range(epochs):
         print(f"Epoch {epoch}, Loss: {total_loss:.4f}")
 
 test_positions = [
-    ([0, 0, 3, 3], "Start position"),
-    ([1, 0, 3, 3], "After first move"),
-    ([2, 1, 3, 3], "Middle position"),
-    ([3, 2, 3, 3], "Almost at goal")
+    ([0, 0, 3, 3], "Start position (0,0)"),
+    ([2, 0, 3, 3], "After moving Right from (0,0)"),
+    ([2, 1, 3, 3], "After moving Down from (2,0)"),
+    ([3, 1, 3, 3], "After moving Right from (2,1)"),
+    ([3, 2, 3, 3], "Almost at goal (3,2)"),
 ]
-# output 
+
 print("\nTest Predictions:")
 for pos, desc in test_positions:
     test_input = flatten(maze) + pos
     output = predict(network, test_input)
     best_move = output.index(max(output))
-    print(f"{desc} {pos}: Predicted move: {['Up', 'Down', 'Left', 'Right'][best_move]} (output: {[f'{x:.3f}' for x in output]})")
+    print(f"{desc}: Predicted move: {['Up', 'Down', 'Left', 'Right'][best_move]} (output: {[f'{x:.3f}' for x in output]})")

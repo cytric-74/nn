@@ -115,3 +115,9 @@ test_positions = [
     ([3, 2, 3, 3], "Almost at goal")
 ]
 
+print("\nTest Predictions:")
+for pos, desc in test_positions:
+    test_input = flatten(maze) + pos
+    output = predict(network, test_input)
+    best_move = output.index(max(output))
+    print(f"{desc} {pos}: Predicted move: {['Up', 'Down', 'Left', 'Right'][best_move]} (output: {[f'{x:.3f}' for x in output]})")

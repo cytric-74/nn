@@ -83,12 +83,35 @@ maze = [
 ]
 
 training_data = [
-    (flatten(maze) + [0, 0, 3, 3], move_to_onehot(1)),  
-    (flatten(maze) + [1, 0, 3, 3], move_to_onehot(1)),  
-    (flatten(maze) + [2, 0, 3, 3], move_to_onehot(3)),  
-    (flatten(maze) + [2, 1, 3, 3], move_to_onehot(1)),  
-    (flatten(maze) + [3, 1, 3, 3], move_to_onehot(3)),
-    (flatten(maze) + [0, 1, 3, 3], move_to_onehot(3)),
+    # From (0,0): Only Down is valid (Right leads to wall)
+    (flatten(maze) + [0, 0, 3, 3], move_to_onehot(1)),  # Down
+    
+    # From (1,0): Down is valid
+    (flatten(maze) + [1, 0, 3, 3], move_to_onehot(1)),  # Down
+    
+    # From (2,0): Right is better (Down leads to a wall)
+    (flatten(maze) + [2, 0, 3, 3], move_to_onehot(3)),  # Right
+    
+    # From (2,1): Down is valid
+    (flatten(maze) + [2, 1, 3, 3], move_to_onehot(1)),  # Down
+    
+    # From (3,1): Right is correct (toward goal)
+    (flatten(maze) + [3, 1, 3, 3], move_to_onehot(3)),  # Right
+    
+    # From (3,2): Right is correct (goal reached)
+    (flatten(maze) + [3, 2, 3, 3], move_to_onehot(3)),  # Right
+    
+    # From (0,1): Right is valid (Down leads to wall)
+    (flatten(maze) + [0, 1, 3, 3], move_to_onehot(3)),  # Right
+    
+    # From (1,1): Down is valid (Right leads to wall)
+    (flatten(maze) + [1, 1, 3, 3], move_to_onehot(1)),  # Down
+    
+    # From (2,2): Down is invalid (wall), Right is invalid (wall), Left is best
+    (flatten(maze) + [2, 2, 3, 3], move_to_onehot(2)),  # Left
+    
+    # From (1,3): Up is correct (Right is invalid)
+    (flatten(maze) + [1, 3, 3, 3], move_to_onehot(0)),  # Up
 ]
 
 input_size = len(flatten(maze)) + 4

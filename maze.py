@@ -114,7 +114,7 @@ test_positions = [
     ([2, 1, 3, 3], "Middle position"),
     ([3, 2, 3, 3], "Almost at goal")
 ]
-
+# output 
 print("\nTest Predictions:")
 for pos, desc in test_positions:
     test_input = flatten(maze) + pos

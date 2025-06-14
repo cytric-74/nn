@@ -72,3 +72,38 @@ def move_to_onehot(move):
     onehot = [0, 0, 0, 0]
     onehot[move] = 1
     return onehot
+
+# defining the maze , a smaller one here
+
+maze = [
+    [0, 0, 1, 0],
+    [1, 0, 1, 0],
+    [0, 0, 0, 1],
+    [1, 1, 0, 0]
+]
+
+training_data = [
+    (flatten(maze) + [0, 0, 3, 3], move_to_onehot(1)),  
+    (flatten(maze) + [1, 0, 3, 3], move_to_onehot(1)),  
+    (flatten(maze) + [2, 0, 3, 3], move_to_onehot(3)),  
+    (flatten(maze) + [2, 1, 3, 3], move_to_onehot(1)),  
+    (flatten(maze) + [3, 1, 3, 3], move_to_onehot(3)),
+]
+
+input_size = len(flatten(maze)) + 4
+hidden_sizes = [16, 12, 8]
+output_sizes = 4
+network = init_network(input_size, hidden_sizes, output_sizes)
+
+epochs = 10000
+lr = 0.1
+for epoch in range(epochs):
+    total_loss = 0
+    for inputs, expected in training_data:
+        layers = forward_pass(network, inputs)
+        output = layers[-1]
+        loss = sum((expected[i] - output[i]) ** 2 for i in range(len(expected)))
+        total_loss += loss
+        backward_pass(network, layers, expected, lr)
+    if epoch % 1000 == 0:
+        print(f"Epoch {epoch}, Loss: {total_loss:.4f}")

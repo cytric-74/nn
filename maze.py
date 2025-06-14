@@ -88,6 +88,7 @@ training_data = [
     (flatten(maze) + [2, 0, 3, 3], move_to_onehot(3)),  
     (flatten(maze) + [2, 1, 3, 3], move_to_onehot(1)),  
     (flatten(maze) + [3, 1, 3, 3], move_to_onehot(3)),
+    (flatten(maze) + [0, 1, 3, 3], move_to_onehot(3)),
 ]
 
 input_size = len(flatten(maze)) + 4

@@ -107,3 +107,11 @@ for epoch in range(epochs):
         backward_pass(network, layers, expected, lr)
     if epoch % 1000 == 0:
         print(f"Epoch {epoch}, Loss: {total_loss:.4f}")
+
+test_positions = [
+    ([0, 0, 3, 3], "Start position"),
+    ([1, 0, 3, 3], "After first move"),
+    ([2, 1, 3, 3], "Middle position"),
+    ([3, 2, 3, 3], "Almost at goal")
+]
+
